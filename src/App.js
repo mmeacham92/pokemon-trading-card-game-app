@@ -1,23 +1,54 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import { Route, Switch } from "react-router-dom";
+
+import SetsList from "./components/sets/SetsList";
+import CardList from "./components/cards/CardList";
+import "./App.css";
 
 function App() {
+  const [sets, setSets] = useState([]);
+  const [currentSet, setCurrentSet] = useState({});
+  const [cardList, setCardList] = useState([]);
+  const [currentCard, setCurrentCard] = useState({});
+
+  useEffect(() => {
+    fetchSets();
+  }, []);
+
+  useEffect(() => {
+    fetchCards();
+  }, []);
+
+  const fetchSets = async () => {
+    const data = await fetch("https://api.pokemontcg.io/v1/sets");
+    const fetchedSets = await data.json();
+    console.log(fetchedSets.sets);
+    setSets(fetchedSets.sets);
+  };
+
+  const fetchCards = async (currentSet) => {
+    const data = await fetch(
+      `https://api.pokemontcg.io/v1/cards?set=${currentSet}`
+    );
+    const fetchedCards = await data.json();
+    console.log(fetchedCards);
+  };
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <SetsList
+        sets={sets}
+        setSets={setSets}
+        currentSet={currentSet}
+        setCurrentSet={setCurrentSet}
+        cardList={cardList}
+        setCardList={setCardList}
+      />
+      <CardList
+        cardList={cardList}
+        setCardList={setCardList}
+        currentCard={currentCard}
+        setCurrentCard={setCurrentCard}
+      />
     </div>
   );
 }
