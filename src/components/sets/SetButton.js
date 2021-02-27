@@ -1,13 +1,23 @@
-const SetButton = ({ name, currentSet, setCurrentSet, cardList, setCardList }) => {
-    const changeCardList = (e) => {
-        setCurrentSet(name);
-        // setCardList(currentSet);
-    }
-    console.log(currentSet);
+import React, { useEffect } from "react";
+
+const SetButton = ({
+  name,
+  sets,
+  currentSet,
+  setCurrentSet,
+  cardList,
+  setCardList,
+  fetchCards,
+}) => {
+
+  const updateSetList = e => {
+    setCurrentSet(sets.find(set => set.name === e.target.name));
+  }
+
   return (
     <button
       className={`set__button ${name.toLowerCase()}__button`}
-      onClick={changeCardList}
+      onClick={updateSetList}
       name={name}
     >
       {name}

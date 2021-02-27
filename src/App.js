@@ -15,24 +15,26 @@ function App() {
     fetchSets();
   }, []);
 
-  useEffect(() => {
-    fetchCards();
-  }, []);
-
   const fetchSets = async () => {
     const data = await fetch("https://api.pokemontcg.io/v1/sets");
     const fetchedSets = await data.json();
-    console.log(fetchedSets.sets);
+    // console.log(fetchedSets.sets);
     setSets(fetchedSets.sets);
   };
 
   const fetchCards = async (currentSet) => {
     const data = await fetch(
-      `https://api.pokemontcg.io/v1/cards?set=${currentSet}`
+      `https://api.pokemontcg.io/v1/cards?setCode=${currentSet.code}`
     );
     const fetchedCards = await data.json();
-    console.log(fetchedCards);
+    console.log(fetchedCards.cards);
+    setCardList(fetchedCards.cards);
   };
+
+  useEffect(() => {
+    fetchCards(currentSet);
+  }, [currentSet]);
+
   return (
     <div className="App">
       <SetsList
@@ -42,12 +44,14 @@ function App() {
         setCurrentSet={setCurrentSet}
         cardList={cardList}
         setCardList={setCardList}
+        fetchCards={fetchCards}
       />
       <CardList
         cardList={cardList}
         setCardList={setCardList}
         currentCard={currentCard}
         setCurrentCard={setCurrentCard}
+        currentSet={currentSet}
       />
     </div>
   );
