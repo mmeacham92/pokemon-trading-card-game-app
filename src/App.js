@@ -16,15 +16,16 @@ function App() {
   }, []);
 
   const fetchSets = async () => {
-    const data = await fetch("https://api.pokemontcg.io/v1/sets");
+    const data = await fetch("https://api.pokemontcg.io/v2/sets");
     const fetchedSets = await data.json();
-    // console.log(fetchedSets.sets);
-    setSets(fetchedSets.sets);
+    console.log(fetchedSets);
+    setSets(fetchedSets.data);
+
   };
 
   const fetchCards = async (currentSet) => {
     const data = await fetch(
-      `https://api.pokemontcg.io/v1/cards?setCode=${currentSet.code}`
+      `https://api.pokemontcg.io/v1/cards?setCode=${currentSet.id}&pageSize=1000`
     );
     const fetchedCards = await data.json();
     console.log(fetchedCards.cards);
