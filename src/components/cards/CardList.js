@@ -26,14 +26,7 @@ const CardList = ({ cardList, currentSet }) => {
         </tbody>
       </table>
     </div>
-    // <div className="cards__list">
-    //   <h1>Current Set: {currentSet.name}</h1>
-    //   <ul class='card__list-item'>
-    //     {cardList.map(card => {
-    //         return <li key={card.id}>{card.name}</li>
-    //     })}
-    //   </ul>
-    // </div>
+
   );
 };
 
