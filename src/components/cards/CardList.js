@@ -5,7 +5,7 @@ const CardList = ({ cardList, currentSet }) => {
       <h1>Current Set: {currentSet.name}</h1>
       <table className='card__table'>
         <thead>
-          <tr>
+          <tr className='card__table-row'>
             <th>No.</th>
             <th>Card Name</th>
             <th>Type</th>
@@ -13,9 +13,9 @@ const CardList = ({ cardList, currentSet }) => {
           </tr>
         </thead>
         <tbody>
-          {cardList.map(card => {
+          {cardList.sort((a, b) => parseInt(a.number) - parseInt(b.number)).map(card => {
             return (
-              <tr key={card.id}>
+              <tr className='card__table-row' key={card.id}>
                 <td>{card.number}</td>
                 <td>{card.name}</td>
                 <td>{card.types ? card.types[0] : ''}</td>

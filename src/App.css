@@ -12,8 +12,18 @@
 
 .card__table {
   width: 60%;
+  border: 1px solid black;
+  padding: 2rem 1rem;
+  border-spacing: 10px;
 }
 
 .card__table-row {
   margin-left: 2rem;
+  border-bottom: 1px solid black;
+}
+
+.card__table th,
+.card__table td {
+  text-align: left;
+  margin-right: 1rem;
 }
